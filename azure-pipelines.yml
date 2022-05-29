@@ -9,28 +9,53 @@ trigger:
 pool:
    vmImage: 'windows-latest'
 
-steps: 
-- task: GoTool@0
-  displayName: Install Go
-  inputs:
-    version: '1.18.2'
-- task: Go@0
-  displayName: Get dependencies
-  inputs:
-    command: 'get'
-    arguments: '-d'
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
-- task: Go@0
-  displayName: Build the App
-  inputs:
-    command: 'build'
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
-- task: CopyFiles@2
-  displayName: Copy to Staging Dir
-  inputs:
-    Contents: "*.exe"
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-- task: PublishBuildArtifacts@1
-  displayName: Publish artifacts
-  inputs:
-     artifactName: drop
+stages:
+- stage: Build
+  displayName: Build the application
+
+  jobs:
+  - job: Build-Go-App
+    displayName: Build Go App
+    steps: 
+     - task: GoTool@0
+       displayName: Install Go
+       inputs:
+        version: '1.18.2'
+
+     - task: Go@0
+       displayName: Get dependencies
+       inputs:
+         command: 'get'
+         arguments: '-d'
+         workingDirectory: '$(System.DefaultWorkingDirectory)'
+
+     - task: Go@0
+       displayName: Build the App
+       inputs:
+         command: 'build'
+         workingDirectory: '$(System.DefaultWorkingDirectory)'
+
+     - task: CopyFiles@2
+       displayName: Copy to Staging Dir
+       inputs:
+         Contents: "*.exe"
+         TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+     - task: PublishBuildArtifacts@1
+       displayName: Publish artifacts
+       inputs:
+         artifactName: drop
+
+- stage: Deploy
+  displayName: Deploy the App
+  jobs:
+  - deployment: VMDeploy
+    displayName: web
+    environment:
+      name:  az-multi-region-env
+      resourceType: VirtualMachine
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo my first deployment
