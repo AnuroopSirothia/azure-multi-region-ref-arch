@@ -14,7 +14,7 @@ stages:
   displayName: Build the application
 
   jobs:
-  - job: Build-Go-App
+  - job: Build_Go_App
     displayName: Build Go App
     steps: 
      - task: GoTool@0
