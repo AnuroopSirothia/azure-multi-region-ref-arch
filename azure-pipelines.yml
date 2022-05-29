@@ -7,11 +7,11 @@ trigger:
 - main
 
 pool:
-   vmImage: 'windows-latest'
+   vmImage: 'ubuntu-latest'
 
 stages:
 - stage: Build
-  displayName: Build the application
+  displayName: Build the App
 
   jobs:
   - job: Build_Go_App
@@ -50,7 +50,7 @@ stages:
   displayName: Deploy the App
   jobs:
   - deployment: VMDeploy
-    displayName: web
+    displayName: Deploy Go App
     environment:
       name:  az-multi-region-env
       resourceType: VirtualMachine
