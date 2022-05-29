@@ -38,7 +38,7 @@ stages:
      - task: CopyFiles@2
        displayName: Copy to Staging Dir
        inputs:
-         Contents: "*.exe"
+         Contents: "azure-multi-region-ref-arch*"
          TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
      - task: PublishBuildArtifacts@1
