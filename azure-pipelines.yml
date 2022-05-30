@@ -44,7 +44,7 @@ stages:
      - task: PublishBuildArtifacts@1
        displayName: Publish artifacts
        inputs:
-         artifactName: /opt
+         artifactName: drop
 
 - stage: Deploy
   displayName: Deploy the App
@@ -58,6 +58,4 @@ stages:
       runOnce:
         deploy:
           steps:
-          - script: echo "Build.BinariesDirectory = $(Build.BinariesDirectory)"
-          - script: echo "Build.ArtifactStagingDirectory = $(Build.ArtifactStagingDirectory)"
-          - script: echo "Agent.BuildDirectory = $(Agent.BuildDirectory)"
+          - script: mv $(Agent.BuildDirectory)/drop /opt/ & . /opt/azure-multi-region-ref-arch
