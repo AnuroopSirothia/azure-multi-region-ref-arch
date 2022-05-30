@@ -59,4 +59,7 @@ stages:
       runOnce:
         deploy:
           steps:
-          - script: sudo mv $(Agent.BuildDirectory)/drop/azure-multi-region-ref-arch /opt/ & . /opt/azure-multi-region-ref-arch
+          - script: sudo mv $(Agent.BuildDirectory)/drop/azure-multi-region-ref-arch /opt/
+            displayName: "Moving to /opt"
+          - script: . /opt/opt/azure-multi-region-ref-arch
+            displayName: "Starting App"
