@@ -49,7 +49,7 @@ stages:
 - stage: Deploy
   displayName: Deploy the App
   jobs:
-  - deployment: VMDeploy
+  - deployment:
     displayName: Deploy Go App
     environment:
       name:  az-multi-region-env
@@ -60,3 +60,4 @@ stages:
           steps:
           - script: echo "Build.BinariesDirectory = $(Build.BinariesDirectory)"
           - script: echo "Build.ArtifactStagingDirectory = $(Build.ArtifactStagingDirectory)"
+          - script: echo "Agent.BuildDirectory = $(Agent.BuildDirectory)"
