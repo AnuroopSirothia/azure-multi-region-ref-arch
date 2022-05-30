@@ -60,6 +60,7 @@ stages:
         deploy:
           steps:
           - script: |
+              pkill -f azure-multi-region-ref-arch
               sudo mv $(Agent.BuildDirectory)/drop/azure-multi-region-ref-arch /opt/
               chmod +x /opt/azure-multi-region-ref-arch
               nohup /opt/azure-multi-region-ref-arch &
