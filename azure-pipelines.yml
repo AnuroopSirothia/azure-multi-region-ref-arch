@@ -61,5 +61,5 @@ stages:
           steps:
           - script: sudo mv $(Agent.BuildDirectory)/drop/azure-multi-region-ref-arch /opt/
             displayName: "Moving to /opt"
-          - script: ls /opt/opt/azure-multi-region-ref-arch
+          - script: ls /opt/azure-multi-region-ref-arch
             displayName: "Starting App"
