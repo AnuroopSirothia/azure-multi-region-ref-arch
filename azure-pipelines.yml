@@ -59,12 +59,13 @@ stages:
       runOnce:
         deploy:
           steps:
-          - script: sudo mv $(Agent.BuildDirectory)/drop/azure-multi-region-ref-arch /opt/
-                    echo Step 4
+          - script: |
+              sudo mv $(Agent.BuildDirectory)/drop/azure-multi-region-ref-arch /opt/
+              echo Step 4
             displayName: "Moving to /opt"
           - task: Bash@3
             inputs:
               targetType: 'inline'
-              script:
+              script: |
                 echo Step 1
                 echo Step 2
