@@ -44,7 +44,7 @@ stages:
      - task: PublishBuildArtifacts@1
        displayName: Publish artifacts
        inputs:
-         artifactName: droptest
+         artifactName: /opt
 
 - stage: Deploy
   displayName: Deploy the App
