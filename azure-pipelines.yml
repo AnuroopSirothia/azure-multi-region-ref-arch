@@ -5,6 +5,7 @@
 
 trigger:
 - main
+- feature/deployment
 
 pool:
    vmImage: 'ubuntu-latest'
